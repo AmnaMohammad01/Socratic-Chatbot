@@ -1,0 +1,129 @@
+# Introduction to Parallel and Distributed Computing
+Parallel and Distributed Computing involves the simultaneous use of multiple processors, computing nodes, or machines to solve computational problems efficiently.
+
+## 1. Parallel Computing
+Parallel computing focuses on executing multiple tasks **simultaneously** on multiple processors or cores within a single machine.
+
+### Key Concepts:
+- **Task Parallelism**: Different tasks are executed in parallel.
+- **Data Parallelism**: The same operation is applied to different parts of a dataset simultaneously.
+- **Shared Memory**: Multiple processors share a single memory space.
+- **Synchronization**: Threads or processes coordinate to ensure correctness.
+
+### Example:
+Consider matrix multiplication:
+A = [[1, 2], [3, 4]]
+B = [[5, 6], [7, 8]]
+
+# Parallel computation
+C[0,0] = A[0,0] * B[0,0] + A[0,1] * B[1,0]
+C[0,1] = A[0,0] * B[0,1] + A[0,1] * B[1,1]
+C[1,0] = A[1,0] * B[0,0] + A[1,1] * B[1,0]
+C[1,1] = A[1,0] * B[0,1] + A[1,1] * B[1,1]
+
+Each calculation can be **parallelized** across multiple processors.
+
+---
+
+## 2. Distributed Computing
+Distributed computing involves multiple computers (**nodes**) working together over a network to solve a problem.
+
+### Key Concepts:
+- **Cluster Computing**: Multiple machines act as a single system.
+- **Grid Computing**: Loosely connected computers working together.
+- **Cloud Computing**: Uses remote servers for distributed processing.
+- **Message Passing Interface (MPI)**: Communication protocol for distributed systems.
+
+### Example:
+A distributed system running a **web search engine**:
+1. **Crawlers** collect web pages.
+2. **Indexers** process and store page content.
+3. **Query processors** retrieve results from indexed data.
+
+---
+
+## 3. Amdahl’s Law (Performance in Parallel Computing)
+Amdahl’s Law states that **speedup from parallelization is limited by the sequential portion** of a program.
+
+Formula:
+Speedup(S) = 1 / (F + (1-F)/N)
+
+Where:
+- `F` = Fraction of code that must be executed sequentially.
+- `N` = Number of processors.
+
+### Example:
+If **10% of a program is sequential**, even with **infinite processors**, the maximum speedup is:
+Speedup = 1 / (0.1 + (1-0.1)/∞) ≈ 10x
+
+This shows why **removing bottlenecks is crucial**.
+
+---
+
+## 4. Distributed File Systems (DFS)
+A Distributed File System (DFS) allows multiple computers to share files over a network.
+
+Examples:
+- **HDFS (Hadoop Distributed File System)**
+- **Google File System (GFS)**
+- **Amazon S3**
+
+### Example:
+HDFS in **Big Data Processing**:
+- **NameNode** manages metadata.
+- **DataNodes** store file blocks.
+- **MapReduce** processes data in parallel.
+
+---
+
+## 5. Parallel Programming Models
+Parallel computing relies on different **programming models**:
+
+### **Thread-based Parallelism**
+- Uses multiple threads within a process.
+- **Example:** OpenMP for shared-memory parallelism.
+
+### **Message Passing**
+- Used in distributed systems (e.g., MPI).
+- **Example:** MPI-based distributed matrix multiplication.
+
+### **MapReduce**
+- Model for large-scale data processing.
+- **Example:** Word count in Hadoop.
+
+---
+
+## 6. Fault Tolerance in Distributed Systems
+Fault tolerance ensures that a system continues to operate despite failures.
+
+### Techniques:
+- **Replication**: Storing multiple copies of data.
+- **Checkpointing**: Periodically saving system state.
+- **Consensus Algorithms**: Ensuring consistency in distributed networks (e.g., Paxos, Raft).
+
+### Example:
+In Google’s **Spanner**, data is replicated across data centers using the **Paxos algorithm**.
+
+---
+
+## 7. Load Balancing in Distributed Systems
+Load balancing distributes tasks across multiple servers **to avoid overloading any single node**.
+
+### Load Balancing Algorithms:
+- **Round Robin**: Assigns tasks in a circular manner.
+- **Least Connections**: Assigns tasks to the node with the fewest active connections.
+- **Dynamic Load Balancing**: Adjusts based on system state.
+
+### Example:
+A cloud-based application uses a **load balancer** to distribute web requests across multiple servers.
+
+---
+
+## 8. Parallel and Distributed Computing in Real Life
+### **Parallel Computing Applications**
+- **Scientific Simulations**: Climate modeling, physics simulations.
+- **AI & Deep Learning**: GPU-based parallel processing.
+
+### **Distributed Computing Applications**
+- **Big Data Processing**: Hadoop, Spark.
+- **Cloud Services**: AWS, Google Cloud, Microsoft Azure.
