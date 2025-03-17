@@ -5,6 +5,8 @@ from langchain.chains import RetrievalQA
 from langchain_community.vectorstores import Chroma
 from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import CharacterTextSplitter
+from chromadb import PersistentClient
+
 
 # ✅ Use st.secrets for API key (Secure for GitHub hosting)
 openai_api_key = st.secrets["OPENAI_API_KEY"]
@@ -36,8 +38,13 @@ try:
     # Generate embeddings using OpenAI
     embeddings = OpenAIEmbeddings(model="text-embedding-ada-002", openai_api_key=openai_api_key)
 
-    # Create a ChromaDB vector store
-    vector_store = Chroma.from_documents(documents, embeddings)
+    # Define a directory for persistent storage
+    chroma_db_path = "./chroma_db"
+    
+    # Initialize PersistentClient
+    client = PersistentClient(path=chroma_db_path)
+    vector_store = Chroma.from_documents(documents, embeddings, client=client)
+
 
     # Set up the RAG pipeline using LangChain
     rag_chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff",
