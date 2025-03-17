@@ -2,10 +2,9 @@ import os
 import streamlit as st
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain.chains import RetrievalQA
-from langchain_community.vectorstores import Chroma
 from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import CharacterTextSplitter
-from chromadb import PersistentClient
+from langchain_community.vectorstores import FAISS
 
 
 # ✅ Use st.secrets for API key (Secure for GitHub hosting)
@@ -37,13 +36,9 @@ try:
 
     # Generate embeddings using OpenAI
     embeddings = OpenAIEmbeddings(model="text-embedding-ada-002", openai_api_key=openai_api_key)
-
-    # Define a directory for persistent storage
-    chroma_db_path = "./chroma_db"
     
-    # Initialize PersistentClient
-    client = PersistentClient(path=chroma_db_path)
-    vector_store = Chroma.from_documents(documents, embeddings, client=client)
+    # Create a FAISS vector store instead of ChromaDB
+    vector_store = FAISS.from_documents(documents, embeddings)
 
 
     # Set up the RAG pipeline using LangChain
