@@ -1,8 +1,7 @@
 streamlit
-sqlite3
 langchain
 langchain-openai
 langchain-community
-chromadb
+faiss-cpu
 python-dotenv
 openai
