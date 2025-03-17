@@ -26,7 +26,7 @@ except Exception as e:
 
 # Load and process documents
 try:
-    loader = TextLoader("docs/knowledge_base.txt")  # Ensure this file exists
+    loader = TextLoader("knowledge_base.txt")  # Ensure this file exists
     raw_documents = loader.load()
 
     # Split documents into smaller chunks for better processing
